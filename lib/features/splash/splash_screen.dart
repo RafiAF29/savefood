@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:savefood/core/constants/app_colors.dart';
 import 'package:savefood/core/theme/app_typography.dart';
+import 'package:savefood/core/network/token_storage.dart';
+import 'package:savefood/features/authentication/auth_service.dart';
 import 'package:savefood/features/onboarding/onboarding_screen.dart';
+import 'package:savefood/features/customer/customer_home_screen.dart';
+import 'package:savefood/features/merchant/merchant_dashboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -39,22 +43,43 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _controller.forward();
+    _checkAuthAndNavigate();
+  }
 
-    Future.delayed(const Duration(milliseconds: 2500), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const OnboardingScreen(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-            transitionDuration: const Duration(milliseconds: 500),
-          ),
-        );
+  Future<void> _checkAuthAndNavigate() async {
+    await Future.delayed(const Duration(milliseconds: 2500));
+    if (!mounted) return;
+
+    final hasToken = await TokenStorage.hasToken();
+
+    if (hasToken) {
+      // Try to get user data
+      final user = await AuthService().getUser();
+      if (user != null && mounted) {
+        Widget destination;
+        if (user.isMerchant) {
+          destination = const MerchantDashboardScreen();
+        } else {
+          destination = const CustomerHomeScreen();
+        }
+        _navigateTo(destination);
+        return;
       }
-    });
+    }
+
+    if (mounted) _navigateTo(const OnboardingScreen());
+  }
+
+  void _navigateTo(Widget destination) {
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => destination,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
+    );
   }
 
   @override
