@@ -93,6 +93,37 @@ class ApiClient {
     return _handleResponse(response);
   }
 
+  /// Multipart POST for file uploads (e.g. food images).
+  Future<Map<String, dynamic>> multipart(
+    String endpoint, {
+    required Map<String, String> fields,
+    String? filePath,
+    String fileField = 'image',
+  }) async {
+    final uri = Uri.parse('${ApiConstants.baseUrl}$endpoint');
+    final request = http.MultipartRequest('POST', uri);
+
+    // Auth header
+    final token = await TokenStorage.getToken();
+    if (token != null) {
+      request.headers['Authorization'] = 'Bearer $token';
+    }
+    request.headers['Accept'] = 'application/json';
+
+    // Fields
+    request.fields.addAll(fields);
+
+    // File
+    if (filePath != null && filePath.isNotEmpty) {
+      request.files.add(await http.MultipartFile.fromPath(fileField, filePath));
+    }
+
+    final streamedResponse = await request.send().timeout(ApiConstants.timeout);
+    final response = await http.Response.fromStream(streamedResponse);
+
+    return _handleResponse(response);
+  }
+
   Map<String, dynamic> _handleResponse(http.Response response) {
     final body = jsonDecode(response.body) as Map<String, dynamic>;
 

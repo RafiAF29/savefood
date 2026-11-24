@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:savefood/core/constants/app_colors.dart';
 import 'package:savefood/core/theme/app_typography.dart';
 
 class SfTextField extends StatelessWidget {
   final String? label;
-  final String? hint;
+  final String? hintText;
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -13,11 +14,12 @@ class SfTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final int? maxLines;
   final bool enabled;
+  final List<TextInputFormatter>? inputFormatters;
 
   const SfTextField({
     super.key,
     this.label,
-    this.hint,
+    this.hintText,
     this.controller,
     this.obscureText = false,
     this.keyboardType,
@@ -26,6 +28,7 @@ class SfTextField extends StatelessWidget {
     this.suffixIcon,
     this.maxLines = 1,
     this.enabled = true,
+    this.inputFormatters,
   });
 
   @override
@@ -44,11 +47,12 @@ class SfTextField extends StatelessWidget {
           validator: validator,
           maxLines: maxLines,
           enabled: enabled,
+          inputFormatters: inputFormatters,
           style: AppTypography.bodyMedium.copyWith(
             color: AppColors.primaryText,
           ),
           decoration: InputDecoration(
-            hintText: hint,
+            hintText: hintText,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
           ),

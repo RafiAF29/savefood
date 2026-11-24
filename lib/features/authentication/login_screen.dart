@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Email field
                 SfTextField(
                   label: AppStrings.email,
-                  hint: 'Enter your email',
+                  hintText: 'Enter your email',
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Icons.email_outlined, size: 20),
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Password field
                 SfTextField(
                   label: AppStrings.password,
-                  hint: 'Enter your password',
+                  hintText: 'Enter your password',
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   prefixIcon: const Icon(Icons.lock_outline, size: 20),

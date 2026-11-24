@@ -178,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Name
                 SfTextField(
                   label: AppStrings.fullName,
-                  hint: 'Enter your full name',
+                  hintText: 'Enter your full name',
                   controller: _nameController,
                   prefixIcon: const Icon(Icons.person_outline, size: 20),
                   validator: (v) =>
@@ -189,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Email
                 SfTextField(
                   label: AppStrings.email,
-                  hint: 'Enter your email',
+                  hintText: 'Enter your email',
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Icons.email_outlined, size: 20),
@@ -204,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Phone
                 SfTextField(
                   label: AppStrings.phone,
-                  hint: 'Enter your phone number',
+                  hintText: 'Enter your phone number',
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   prefixIcon: const Icon(Icons.phone_outlined, size: 20),
@@ -215,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (_selectedRole == 'merchant') ...[
                   SfTextField(
                     label: 'Business Name',
-                    hint: 'Enter your business name',
+                    hintText: 'Enter your business name',
                     controller: _businessNameController,
                     prefixIcon: const Icon(Icons.store_outlined, size: 20),
                     validator: (v) => _selectedRole == 'merchant' &&
@@ -226,14 +226,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 16),
                   SfTextField(
                     label: 'Business Description',
-                    hint: 'Describe your business',
+                    hintText: 'Describe your business',
                     controller: _businessDescController,
                     maxLines: 3,
                   ),
                   const SizedBox(height: 16),
                   SfTextField(
                     label: 'Address',
-                    hint: 'Enter your business address',
+                    hintText: 'Enter your business address',
                     controller: _addressController,
                     prefixIcon:
                         const Icon(Icons.location_on_outlined, size: 20),
@@ -244,7 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Password
                 SfTextField(
                   label: AppStrings.password,
-                  hint: 'Min. 8 characters',
+                  hintText: 'Min. 8 characters',
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   prefixIcon: const Icon(Icons.lock_outline, size: 20),
@@ -269,7 +269,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // Confirm password
                 SfTextField(
                   label: AppStrings.confirmPassword,
-                  hint: 'Re-enter your password',
+                  hintText: 'Re-enter your password',
                   controller: _confirmPasswordController,
                   obscureText: _obscureConfirm,
                   prefixIcon: const Icon(Icons.lock_outline, size: 20),
