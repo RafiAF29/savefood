@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:savefood/core/constants/app_colors.dart';
 import 'package:savefood/core/theme/app_typography.dart';
 import 'package:savefood/features/food/food_service.dart';
+import 'package:savefood/features/order/checkout_screen.dart';
 import 'package:savefood/shared/models/food_model.dart';
 import 'package:savefood/shared/widgets/food_card.dart';
 
@@ -289,10 +290,13 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
               child: ElevatedButton(
                 onPressed: food.stock > 0 && !food.isExpired
                     ? () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Order feature coming in Phase 6!'),
-                            backgroundColor: AppColors.forestGreen,
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CheckoutScreen(
+                              food: food,
+                              quantity: _quantity,
+                            ),
                           ),
                         );
                       }

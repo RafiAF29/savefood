@@ -4,8 +4,8 @@ import 'package:savefood/core/constants/app_strings.dart';
 import 'package:savefood/core/theme/app_typography.dart';
 import 'package:savefood/core/network/api_client.dart';
 import 'package:savefood/features/authentication/auth_service.dart';
-import 'package:savefood/features/customer/customer_home_screen.dart';
-import 'package:savefood/features/merchant/merchant_dashboard_screen.dart';
+import 'package:savefood/features/customer/customer_main_screen.dart';
+import 'package:savefood/features/merchant/merchant_main_screen.dart';
 import 'package:savefood/shared/widgets/sf_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -82,9 +82,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       Widget destination;
       if (response.user.isMerchant) {
-        destination = const MerchantDashboardScreen();
+        destination = const MerchantMainScreen();
       } else {
-        destination = const CustomerHomeScreen();
+        destination = const CustomerMainScreen();
       }
 
       Navigator.of(context).pushAndRemoveUntil(

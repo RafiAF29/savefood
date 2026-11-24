@@ -4,8 +4,8 @@ import 'package:savefood/core/theme/app_typography.dart';
 import 'package:savefood/core/network/token_storage.dart';
 import 'package:savefood/features/authentication/auth_service.dart';
 import 'package:savefood/features/onboarding/onboarding_screen.dart';
-import 'package:savefood/features/customer/customer_home_screen.dart';
-import 'package:savefood/features/merchant/merchant_dashboard_screen.dart';
+import 'package:savefood/features/customer/customer_main_screen.dart';
+import 'package:savefood/features/merchant/merchant_main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -58,9 +58,9 @@ class _SplashScreenState extends State<SplashScreen>
       if (user != null && mounted) {
         Widget destination;
         if (user.isMerchant) {
-          destination = const MerchantDashboardScreen();
+          destination = const MerchantMainScreen();
         } else {
-          destination = const CustomerHomeScreen();
+          destination = const CustomerMainScreen();
         }
         _navigateTo(destination);
         return;
